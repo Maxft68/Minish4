@@ -1,0 +1,10 @@
+in
+*.txt
+minishell
+*.o
+*.a
+*.
+.vscode
+out*
+in*
+minishell_tester/
