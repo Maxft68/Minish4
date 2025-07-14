@@ -1,5 +1,4 @@
-
-#include "../mandatory/minishell.h"
+#include "minishell.h"
 
 void	free_array(char **array)
 {
@@ -46,6 +45,7 @@ void	close_all_pipe_exit(t_all *all)
 
 void	ft_exit(char *error, t_all *all, int error_code)
 {
+	//fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 	close_all_pipe_exit(all);
 	if (error)
 		ft_putstr_fd(error, 2);

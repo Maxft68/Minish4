@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		char *input = gc_strdup_input(firstinput, &all);
 		if (create_lexer(input, &all) != -1)
-			if (pars_to_exec(&all) != 0)
+			pars_to_exec(&all);
 		free_garbage_collect(&all.garbage);
 		all.garbage = NULL;
 		all.token = NULL;

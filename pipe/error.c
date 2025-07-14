@@ -8,7 +8,7 @@ int	ft_close(t_all *all, int *fd)
 		{
 			all->error_code = 1;
 			ft_putstr_fd("WriteOnMe: ", 2);
-			perror("close");
+			//perror("close");
 			*fd = -1;
 			return (1);
 		}
