@@ -125,8 +125,7 @@ int	do_exit(t_all *all)
 	arg = all->pipe.cmd_args[all->pipe.pipe];
 	if (!arg[1] && all->pipe.nb_pipe == 0)
 	{
-		return (ft_putstr_fd("exit\n", 2),fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original), ft_exit("", all, all->error_code),
-			all->error_code);
+		return (ft_putstr_fd("exit\n", 2),fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original), ft_exit("", all, 0), 0);
 	}
 	if (!arg[1] && all->pipe.nb_pipe != 0)
 		return (ft_exit("", all, all->error_code), all->error_code);
@@ -144,5 +143,5 @@ int	do_exit(t_all *all)
 	im_a_child(all);
 	fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 	ft_exit("", all, (arg1 % 256));
-	return (1);
+	return (0);
 }

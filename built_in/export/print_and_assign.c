@@ -1,7 +1,7 @@
 
 #include "../../mandatory/minishell.h"
 
-void	print_and_null(t_all *all, char *s)
+int	print_and_null(t_all *all, char *s)
 {
 	ft_putstr_fd("WriteOnMe: export: `", 2);
 	if (s)
@@ -10,4 +10,6 @@ void	print_and_null(t_all *all, char *s)
 	all->data.n = NULL;
 	all->error_code = 1;
 	all->data.val = NULL;
+	all->data.export_error = 1;
+	return (1);
 }

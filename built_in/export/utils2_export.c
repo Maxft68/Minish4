@@ -1,7 +1,6 @@
 
 #include "../../mandatory/minishell.h"
 
-
 void	del_export(t_export **export)
 {
 	t_export	*temp;
@@ -84,25 +83,22 @@ void	export_arg(t_all *all, char *s)
 	}
 }
 
-void    do_add_env(t_all *all)
+int	do_add_env(t_all *all)
 {
-    int        x;
-    char    *s;
+	int		x;
+	char	*s;
+	all->data.export_error = 0;
 
-    x = 0;
-    // if (all->pipe.cmd_args[all->pipe.pipe][1][0] == '\0')
-    // {
-    //     print_and_null(all, "BRAVO REGIS export: not an identifier");
-    //     return ;
-    // }
-    while (all->pipe.cmd_args[all->pipe.pipe][1 + x])
-    {
-        all->data.val = NULL;
-        all->data.n = NULL;
-        all->data.egal = 0;
-        all->data.add = 0;
-        s = gc_strdup_env(all->pipe.cmd_args[all->pipe.pipe][1 + x], all);
-        export_arg(all, s);
-        x++;
-    }
+	x = 0;
+	while (all->pipe.cmd_args[all->pipe.pipe][1 + x])
+	{
+		all->data.val = NULL;
+		all->data.n = NULL;
+		all->data.egal = 0;
+		all->data.add = 0;
+		s = gc_strdup_env(all->pipe.cmd_args[all->pipe.pipe][1 + x], all);
+		export_arg(all, s);
+		x++;
+	}
+	return (all->data.export_error);
 }

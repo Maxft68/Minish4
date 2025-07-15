@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 10:40:24 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/14 16:42:44 by rbier            ###   ########.fr       */
+/*   Updated: 2025/07/15 16:04:17 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../mandatory/minishell.h"
 
-void	test_the_path_mini(t_all *all, char *s)
+int	test_the_path_mini(t_all *all, char *s)
 {
 	char	*str;
 	char	*temp;
 	int		i;
 
 	if (s && s[0] == '\0')
-		return ;
+		return (0);
 	i = ft_strlen(s);
 	while (i > 0 && (s[i - 1] == '/'))
 	{
@@ -31,18 +31,18 @@ void	test_the_path_mini(t_all *all, char *s)
 	{
 		str = gc_strjoin(all, "WriteOnMe: cd:", s);
 		perror(str);
-		all->error_code = 1;
+		return(all->error_code = 1, 1);
 	}
+	return(0);
 }
 
 static void	chdir_null(t_all *all, char *str, char *s)
 {
 	str = gc_strjoin(all, "WriteOnMe: cd: ", s);
 	perror(str);
-	all->error_code = 1;
 }
 
-void	test_the_path(t_all *all, char *s)
+int	test_the_path(t_all *all, char *s)
 {
 	char	*str;
 
@@ -50,7 +50,7 @@ void	test_the_path(t_all *all, char *s)
 	{
 		str = ft_pwd(all);
 		if (!str || s[0] == '\0')
-			return ;
+			return (0);
 		if (s[0] == '/' && chdir(s) == 0)
 		{
 			replace_or_add_env(all, "OLDPWD", gc_strdup_env(str, all));
@@ -65,8 +65,9 @@ void	test_the_path(t_all *all, char *s)
 					find_the_value(all, "PWD"), s));
 		}
 		else if (chdir(s) == -1)
-			chdir_null(all, str, s);
+			return(chdir_null(all, str, s), 1);
 	}
+	return(0);
 }
 
 char	*replace_until_the_last(t_all *all, char *s, int c)

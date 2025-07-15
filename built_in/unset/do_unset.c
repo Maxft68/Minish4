@@ -39,7 +39,7 @@ void	unset_arg(t_all *all, char *s)
 	}
 }
 
-void	do_unset(t_all *all)
+int	do_unset(t_all *all)
 {
 	int		x;
 	char	*s;
@@ -53,4 +53,5 @@ void	do_unset(t_all *all)
 		unset_arg(all, s);
 		x++;
 	}
+	return(0);
 }

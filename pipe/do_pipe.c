@@ -71,8 +71,7 @@ void	do_pipe(t_all *all)
 		{
 			if (is_built_in(all) == 0)
 			{
-				do_built_in(all);
-				ft_exit("", all, 0);
+				ft_exit("", all, do_built_in(all));
 			}
 			exec_cmd(all);
 		}

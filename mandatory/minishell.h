@@ -138,6 +138,7 @@ typedef struct s_data
 	bool						d_quote;
 	int							stdout_original;
 	int							stdin_original;
+	int							export_error;
 }								t_data;
 
 typedef struct s_hd_data
@@ -281,9 +282,9 @@ void							do_env(t_all *all, char **env);
 char							**do_char_env(t_all *all);
 void							print_node_env(t_all *all, t_env *env);
 void							free_env(t_env **env);
-void							do_export(t_all *all);
+int								do_export(t_all *all);
 void							do_add_env_next(t_all *all, char *s);
-void							do_add_env(t_all *all);
+int								do_add_env(t_all *all);
 int								do_exit(t_all *all);
 void							im_a_child(t_all *all);
 int								ft_str_digit(char *str);
@@ -300,13 +301,13 @@ void							replace_or_add_env(t_all *all, char *name,
 int								is_alpha_str(char *str);
 void							sort_list(t_all *all);
 void							add_value_env(t_all *all, char *s);
-void							print_and_null(t_all *all, char *s);
-void							do_unset(t_all *all);
-void							do_pwd(t_all *all);
-void							do_cd(t_all *all);
+int								print_and_null(t_all *all, char *s);
+int							do_unset(t_all *all);
+int							do_pwd(t_all *all);
+int								do_cd(t_all *all);
 char							*do_valid_s(t_all *all, char *s);
-void							test_the_path(t_all *all, char *s);
-void							test_the_path_mini(t_all *all, char *s);
+int								test_the_path(t_all *all, char *s);
+int								test_the_path_mini(t_all *all, char *s);
 char							*replace_until_the_last(t_all *all, char *s,
 									int c);
 char							*find_the_value(t_all *all, char *name);

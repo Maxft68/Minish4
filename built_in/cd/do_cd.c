@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:00:07 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/15 14:20:13 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:02:30 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*do_valid_s(t_all *all, char *s)
 	return (s);
 }
 
-void	do_cd(t_all *all)
+int	do_cd(t_all *all)
 {
 	char	*s;
 
@@ -98,10 +98,9 @@ void	do_cd(t_all *all)
 		&& all->pipe.cmd_args[all->pipe.pipe][2])
 	{
 		ft_putstr_fd("WriteOnMe: cd: too many arguments\n", 2);
-		all->error_code = 1;
 		// ft_putnbr_fd(all->error_code, 2);
 		// ft_putstr_fd("code erreur dans do cd !!\n", 2);
-		return ;
+		return (all->error_code = 1, 1);
 	}
 	if (all->pipe.cmd_args[all->pipe.pipe][1])
 		s = do_valid_s(all, all->pipe.cmd_args[all->pipe.pipe][1]);
@@ -112,5 +111,6 @@ void	do_cd(t_all *all)
 	else if (ft_strcmp(s, "..") == 0)
 		do_cd_double_dot(all);
 	else
-		test_the_path(all, s);
+		return(test_the_path(all, s));
+	return(0);
 }
