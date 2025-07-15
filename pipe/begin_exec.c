@@ -21,7 +21,11 @@ static int	pipe_or_not_pipe(t_all *all)
 			|| !all->pipe.cmd_args[0][0]))
 	{
 		if (do_no_pipe(all) == 1)
+		{
+			// ft_putnbr_fd(all->error_code, 2);
+			// ft_putstr_fd("pipe_or_not_pipe code erreur \n", 2);
 			return (1);
+		}
 		return (0);
 	}
 	else
@@ -57,8 +61,15 @@ int	exec_part(t_all *all)
 	alloc_my_herdoc_fd(all);
 	while (i < all->pipe.nb_pipe + 1)
 	{
-		if (pipe_or_not_pipe(all) && (all->pipe.nb_pipe == 0 && is_built_in(all) == 0))
+		pipe_or_not_pipe(all);
+		if (all->pipe.nb_pipe == 0 && is_built_in(all) == 0)
+		{
+			// ft_putnbr_fd(all->error_code, 2);
+			// ft_putstr_fd("forked est bien mis a 0\n", 2);
 			forked = 0;
+		}
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("forked est PAS MIS 0\n", 2);
 		// ft_putnbr_fd(all->error_code, 2);
 		// ft_putstr_fd("code erreur dans exec part\n", 2);
 		close_fd_and_hd_fd(all, i);

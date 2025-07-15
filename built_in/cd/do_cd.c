@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:00:07 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/14 16:43:38 by rbier            ###   ########.fr       */
+/*   Updated: 2025/07/15 14:20:13 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,17 @@ void	do_cd(t_all *all)
 	char	*s;
 
 	s = NULL;
-	if (all->pipe.cmd_args[all->pipe.nb_pipe][1]
-		&& all->pipe.cmd_args[all->pipe.nb_pipe][2])
+	if (all->pipe.cmd_args[all->pipe.pipe][1]
+		&& all->pipe.cmd_args[all->pipe.pipe][2])
 	{
 		ft_putstr_fd("WriteOnMe: cd: too many arguments\n", 2);
 		all->error_code = 1;
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("code erreur dans do cd !!\n", 2);
 		return ;
 	}
-	if (all->pipe.cmd_args[all->pipe.nb_pipe][1])
-		s = do_valid_s(all, all->pipe.cmd_args[all->pipe.nb_pipe][1]);
+	if (all->pipe.cmd_args[all->pipe.pipe][1])
+		s = do_valid_s(all, all->pipe.cmd_args[all->pipe.pipe][1]);
 	if (!s || ft_strcmp(s, "~") == 0)
 		do_cd_home(all, s);
 	else if (ft_strcmp(s, "-") == 0)

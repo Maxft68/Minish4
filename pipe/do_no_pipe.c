@@ -95,13 +95,19 @@ int	do_no_pipe(t_all *all)
 		//fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 		return (1);
 	}
-	do_built_in(all);
-	ft_putstr_fd("je devrais etre ici", 2);
-	ft_putnbr_fd(all->error_code, 2);
-	ft_putstr_fd("\n", 2);
+	if (do_built_in(all) == 1)
+	{
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("do no pipe code erreur \n", 2);
+		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("apres fd back to origin \n", 2);
+		return(1);
+	}
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("do no pipe RETURN 0 code erreur \n", 2);
 	fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-	ft_putstr_fd("je suis la ", 2);
-	ft_putnbr_fd(all->error_code, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("apres fd back to origin \n", 2);
 	return (0);
 }

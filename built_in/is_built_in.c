@@ -8,7 +8,7 @@ int	do_built_in(t_all *all)
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "echo", 5) == 0)
 		return (do_echo(all, all->pipe.cmd_args, all->pipe.pipe), 0);
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "cd", 3) == 0)
-		return (do_cd(all), 0);
+		return (do_cd(all), 42);
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "env", 4) == 0)
 		return (print_node_env(all, all->env), 0);
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "exit", 5) == 0)
@@ -32,9 +32,9 @@ int	is_built_in(t_all *all)
 		return (0);
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "cd", 3) == 0)
 	{
-		ft_putstr_fd("je suis la ??? je devrais ", 2);
-		ft_putnbr_fd(all->error_code, 2);
-		ft_putstr_fd("\n", 2);
+		// ft_putstr_fd("je suis la ???  error code = ", 2);
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("\n", 2);
 		return (0);
 	}
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "env", 4) == 0)
