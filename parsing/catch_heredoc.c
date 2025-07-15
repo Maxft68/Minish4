@@ -29,6 +29,7 @@ static void	sigint_hd(int signum)
 	{
 		g_sigint_flag = 1;
 		ft_putstr_fd("\n", STDOUT_FILENO);
+		close(STDIN_FILENO);
 		return ;
 	}
 }
