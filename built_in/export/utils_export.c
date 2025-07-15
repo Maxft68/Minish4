@@ -35,7 +35,7 @@ int	replace_env(t_all *all, char *name, char *value)
 	current = all->env;
 	while (current)
 	{
-		if (!current->name || !current->value)
+		if (!current->name)//!current->name || !current->value
 		{
 			while (current && (!current->name || !current->value))
 				current = current->next;

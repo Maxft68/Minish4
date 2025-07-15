@@ -91,7 +91,7 @@ void	do_add_env_next(t_all *all, char *s)
 }
 
 /******************************************************************************
-Check if if juste print or add a new node env
+Check if just print or add a new node env
 ******************************************************************************/
 int	do_export(t_all *all)
 {

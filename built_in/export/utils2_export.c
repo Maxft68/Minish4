@@ -1,4 +1,3 @@
-
 #include "../../mandatory/minishell.h"
 
 void	del_export(t_export **export)
@@ -81,6 +80,25 @@ void	export_arg(t_all *all, char *s)
 			ft_lstadd_back_env(all, &all->env, ft_lstnew_env(all, all->data.n,
 					all->data.val));
 	}
+	// --- Correction export: mise à jour de la variable dans export si elle existe déjà ---
+	if (all->data.n && all->data.egal == 1)
+	{
+		t_export *curr = all->export;
+		while (curr)
+		{
+			if (ft_strcmp(curr->name, all->data.n) == 0)
+			{
+				if (curr->value)
+					free(curr->value); // ou gc_free si GC
+				curr->value = all->data.val ? gc_strdup_env(all->data.val, all) : NULL;
+				return;
+			}
+			curr = curr->next;
+		}
+	}
+	// Si la variable n'existe pas dans export, on l'ajoute
+	if (all->data.n && all->data.egal == 1 && !search_export(all, all->data.n))
+		ft_lstadd_back_export(&all->export, ft_lstnew_env(all, all->data.n, all->data.val));
 }
 
 int	do_add_env(t_all *all)
