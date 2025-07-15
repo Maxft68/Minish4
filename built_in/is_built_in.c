@@ -10,7 +10,7 @@ int	do_built_in(t_all *all)
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "cd", 3) == 0)
 		return (do_cd(all));
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "env", 4) == 0)
-		return (print_node_env(all, all->env), 0);
+		return (print_node_env(all, all->env));
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "exit", 5) == 0)
 		return(do_exit(all));
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "export", 7) == 0)

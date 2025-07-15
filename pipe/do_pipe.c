@@ -56,7 +56,7 @@ static void	open_redir_out(t_all *all)
 /******************************************************************************
 We fork we are in the child process
 ******************************************************************************/
-void	do_pipe(t_all *all)
+int	do_pipe(t_all *all)
 {
 	open_pipe_and_fork(all);
 	if (all->pipe.pid[all->pipe.pipe] == 0)
@@ -73,8 +73,9 @@ void	do_pipe(t_all *all)
 			{
 				ft_exit("", all, do_built_in(all));
 			}
-			exec_cmd(all);
+			return(exec_cmd(all));
 		}
-		ft_exit("", all, 0);
+		ft_exit("", all, 127);
 	}
+	return(1);
 }

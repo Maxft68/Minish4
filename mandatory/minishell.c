@@ -14,7 +14,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		// 
-		signals_swing();
+		// signals_swing();
 		// char *firstinput = readline("WriteOnMe "); //a remettre apres mpanic tester
 		// if (!firstinput)
 		// 	break;

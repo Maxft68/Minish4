@@ -48,7 +48,7 @@ void	ft_exit(char *error, t_all *all, int error_code)
 	//fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 	close_all_pipe_exit(all);
 	if (error)
-		ft_putstr_fd(error, 2);
+	ft_putstr_fd(error, 2);
 	if (error_code)
 		all->error_code = error_code;
 	if (all->garbage)

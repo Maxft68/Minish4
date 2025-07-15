@@ -1,16 +1,16 @@
 
 #include "minishell.h"
 
-void	print_node_env(t_all *all, t_env *env)
+int	print_node_env(t_all *all, t_env *env)
 {
 	if (!env)
-		return ;
+		return(127) ;
 	if (all->pipe.cmd_args[all->pipe.pipe][1])
 	{
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
-		ft_putstr_fd("\n", 2);
-		return ;
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (all->error_code = 127, 127);
 	}
 	while (env)
 	{
@@ -21,6 +21,7 @@ void	print_node_env(t_all *all, t_env *env)
 		}
 		env = env->next;
 	}
+	return(0);
 }
 
 void	free_env(t_env **env)

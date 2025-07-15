@@ -255,7 +255,7 @@ void							join_to_new(t_all *all, char *val);
 char							*search_pipe_redir(int pipe, t_token_type type,
 									t_all *all);
 /* **********Exec functions************************************************** */
-void							do_pipe(t_all *all);
+int							do_pipe(t_all *all);
 int								do_no_pipe(t_all *all);
 int								do_redir_fd(t_all *all);
 void							fd_back_origin(t_all *all, int *stdout_original,
@@ -280,7 +280,7 @@ int								do_built_in(t_all *all);
 int								do_echo(t_all *all, char ***args, int pipe);
 void							do_env(t_all *all, char **env);
 char							**do_char_env(t_all *all);
-void							print_node_env(t_all *all, t_env *env);
+int								print_node_env(t_all *all, t_env *env);
 void							free_env(t_env **env);
 int								do_export(t_all *all);
 void							do_add_env_next(t_all *all, char *s);
