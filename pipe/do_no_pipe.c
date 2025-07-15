@@ -20,9 +20,9 @@ int	do_redir_in_no_pipe(t_all *all, char *redir)
 {
 	all->pipe.fd_infile = open(redir, O_RDONLY);
 	if (all->pipe.fd_infile == -1)
-		return (error_msg_no_pipe(all, redir));
+		return (error_msg_no_pipe(all, redir), 1);
 	if (dup2(all->pipe.fd_infile, STDIN_FILENO) == -1)
-		return (error_dup2(all, all->pipe.fd_infile, redir));
+		return (error_dup2(all, all->pipe.fd_infile, redir), 1);
 	ft_close(all, &all->pipe.fd_infile);
 	return (0);
 }
@@ -90,6 +90,8 @@ int	do_no_pipe(t_all *all)
 	}
 	if (do_redir_no_pipe(all) == 1 || !all->pipe.cmd_args[0][0])
 	{
+		ft_putstr_fd("je devrais etre ici", 2);
+		ft_putstr_fd("\n", 2);
 		//fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 		return (1);
 	}

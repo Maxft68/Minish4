@@ -46,24 +46,38 @@ int	exec_part(t_all *all)
 {
 	int	status;
 	int	i;
+	int	forked;
 
 	i = 0;
 	status = 0;
+	forked = 1;
 	all->pipe.pid = gc_malloc(all, sizeof(pid_t) * (all->pipe.nb_pipe + 1));
 	memset(all->pipe.pid, 0, sizeof(pid_t) * (all->pipe.nb_pipe + 1));
 	alloc_my_pipe_fd(all);
 	alloc_my_herdoc_fd(all);
 	while (i < all->pipe.nb_pipe + 1)
 	{
-		pipe_or_not_pipe(all);
+		if (pipe_or_not_pipe(all) && (all->pipe.nb_pipe == 0 && is_built_in(all) == 0))
+			forked = 0;
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("code erreur dans exec part\n", 2);
 		close_fd_and_hd_fd(all, i);
+		// ft_putnbr_fd(all->error_code, 2);
+		// ft_putstr_fd("code erreur dans exec partv JUSTE APRES\n", 2);
 		i++;
 		all->pipe.pipe++;
 	}
 	i = 0;
 	all->pipe.pipe = 0;
-	while (i < all->pipe.nb_pipe + 1)
-		waiting_zzz(all, i++, &status);
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("code erreur dans exec partv JUSTE APRES APRES\n", 2);
+	if (forked == 1)
+	{
+		while (i < all->pipe.nb_pipe + 1)
+			waiting_zzz(all, i++, &status);
+	}
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("code erreur dans exec partv JUSTE APRES APRES laaa\n", 2);
 	all->pipe.i = 0;
 	all->pipe.pipe = 0;
 	all->pipe.nb_pipe = 0;

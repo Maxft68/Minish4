@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **env)
 		char *input = gc_strdup_input(firstinput, &all);
 		if (create_lexer(input, &all) != -1)
 			pars_to_exec(&all);
+		// ft_putnbr_fd(all.error_code, 2);
+		// ft_putstr_fd("code erreur dans main\n", 2);
 		free_garbage_collect(&all.garbage);
 		all.garbage = NULL;
 		all.token = NULL;
