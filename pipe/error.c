@@ -26,16 +26,16 @@ void	error_msg(t_all *all, char *s)
 
 int	error_msg_no_pipe(t_all *all, char *s)
 {
-	ft_putstr_fd("WriteOnMe: ", 2);
-	ft_putstr_fd("je suis la ?--------- ", 2);
-	ft_putnbr_fd(all->error_code, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd("WriteOnMe: ", 2);
+	// ft_putstr_fd("je suis la ?--------- ", 2);
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("\n", 2);
 	all->error_code = 1;
-	ft_putnbr_fd(all->error_code, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("\n", 2);
 	perror(s);
-	ft_putnbr_fd(all->error_code, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putnbr_fd(all->error_code, 2);
+	// ft_putstr_fd("\n", 2);
 	return (1);
 }
 

@@ -81,7 +81,7 @@ void	next_token(t_all *all)
 		create_operator_token(HEREDOC, "<<", all);
 	else if (ft_isprint(c) || c == '/' || c == '-' || c == '_')
 		create_word_token(all);
-	else if (c == '\0' && !all->lexer->input[all->lexer->position + 1])
+	else if (c == '\0' || !all->lexer->input[all->lexer->position + 1])
 		return ;
 	else
 		create_token(ILLEGAL, "", all);

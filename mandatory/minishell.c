@@ -15,16 +15,16 @@ int	main(int argc, char **argv, char **env)
 	{
 		// 
 		signals_swing();
-		// char *firstinput = readline("WriteOnMe "); //a remettre apres mpanic tester
-		// if (!firstinput)
-		// 	break;
-		char *firstinput = readline("minishell $");
+		char *firstinput = readline("WriteOnMe "); //a remettre apres mpanic tester
 		if (!firstinput)
-		{
-			if (isatty(STDIN_FILENO))
-			write(2, "exit\n", 6);
-			exit (all.error_code);
-		}
+			break;
+		// char *firstinput = readline("minishell $"); // UNIQUEMENT POUR TEST MPANIC
+		// if (!firstinput)
+		// {
+		// 	if (isatty(STDIN_FILENO))
+		// 	write(2, "exit\n", 6);
+		// 	exit (all.error_code);
+		// }
 		char *input = gc_strdup_input(firstinput, &all);
 		if (create_lexer(input, &all) != -1)
 			pars_to_exec(&all);
@@ -36,6 +36,6 @@ int	main(int argc, char **argv, char **env)
 		all.rdir_tkn = NULL;
 	}
 	ft_exit("exit\n", &all, all.error_code);
-	(void)argv;
+	(void)argv; 
 }
 

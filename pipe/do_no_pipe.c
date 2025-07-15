@@ -90,8 +90,8 @@ int	do_no_pipe(t_all *all)
 	}
 	if (do_redir_no_pipe(all) == 1 || !all->pipe.cmd_args[0][0])
 	{
-		ft_putstr_fd("je devrais etre ici", 2);
-		ft_putstr_fd("\n", 2);
+		//ft_putstr_fd("je devrais etre ici", 2);
+		//ft_putstr_fd("\n", 2);
 		//fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 		return (1);
 	}
