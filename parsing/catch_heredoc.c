@@ -93,6 +93,8 @@ void	catch_heredoc(t_all *all)
 			if (g_sigint_flag == 1)
 			{
 				tmp->next->str = NULL;
+				all->error_code = 130;
+				break;
 				// all->hd_data.hd_escape = true;
 				//g_sigint_flag = 0;
 			}
