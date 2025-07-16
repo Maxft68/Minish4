@@ -94,7 +94,7 @@ int	pars_to_exec(t_all *all)
 	if (all->token && !check_tkn_lst(all))
 	{
 		catch_heredoc(all);
-		if (g_sigint_flag == 1)
+		if (g_sigint_flag >= 1) // 1 = SIGINT, 2 = EOF (Ctrl+D)
 		{
 			g_sigint_flag = 0;
 			return (1);

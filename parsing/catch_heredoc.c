@@ -33,7 +33,14 @@ static void	sigint_hd(int signum)
 		return ;
 	}
 }
+void	hd_abort_error(char *eof)
+{
+	ft_putstr_fd("minishell:warning: here-document", STDOUT_FILENO);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", STDOUT_FILENO);
+	ft_putstr_fd(eof, STDOUT_FILENO);
+	ft_putstr_fd("')\n\n", STDOUT_FILENO);
 
+}
 static char	*process_input_lines(char *str, char *hd_eof, t_all *all)
 {
 	char	*line;
@@ -45,7 +52,16 @@ static char	*process_input_lines(char *str, char *hd_eof, t_all *all)
 	while (1)
 	{
 		line = readline("> ");
-		if (line == NULL || g_sigint_flag == 1)
+		if (line == NULL)
+		{
+			if (g_sigint_flag == 0)
+			{
+				hd_abort_error(hd_eof);
+				g_sigint_flag = 2;
+			}
+			break ;
+		}
+		if (g_sigint_flag == 1)
 			break ;
 		if (ft_strncmp(line, hd_eof, all->hd_data.hd_eof_len) == 0
 			&& ft_strlen(line) == all->hd_data.hd_eof_len)
@@ -88,15 +104,14 @@ void	catch_heredoc(t_all *all)
 	{
 		if (tmp->type == HEREDOC)
 		{
+			g_sigint_flag = 0;
 			str = gc_strdup(append_hd(tmp->next->str, all), all);
 			initialize_hd_data(str, all);
-			if (g_sigint_flag == 1)
+			if (g_sigint_flag >= 1)
 			{
 				tmp->next->str = NULL;
 				all->error_code = 130;
 				break;
-				// all->hd_data.hd_escape = true;
-				//g_sigint_flag = 0;
 			}
 			if (!str)
 				break ;
@@ -106,4 +121,9 @@ void	catch_heredoc(t_all *all)
 		}
 		tmp = tmp->next;
 	}
+	if (all->data.stdout_original > 2 || all->data.stdin_original > 2)
+		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
+	if (all->data.stdout_original > 2 || all->data.stdin_original > 2)
+		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
+	g_sigint_flag = 0;
 }
