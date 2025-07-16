@@ -123,7 +123,5 @@ void	catch_heredoc(t_all *all)
 	}
 	if (all->data.stdout_original > 2 || all->data.stdin_original > 2)
 		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-	if (all->data.stdout_original > 2 || all->data.stdin_original > 2)
-		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 	g_sigint_flag = 0;
 }
