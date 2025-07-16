@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxoph <maxoph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:00:07 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/15 16:02:30 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:47:24 by maxoph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	do_cd_home(t_all *all, char *s)
 		s = NULL;
 	}
 	if (s)
-		test_the_path(all, s);
+		test_the_path_mini(all, s);
 	copy_list(all);
 	sort_list(all);
 }
@@ -69,7 +69,7 @@ void	do_cd_minus(t_all *all)
 		replace_or_add_env(all, "PWD", old);
 	}
 	if (old)
-		test_the_path(all, old);
+		test_the_path_mini(all, old);
 	copy_list(all);
 	sort_list(all);
 }
@@ -98,8 +98,6 @@ int	do_cd(t_all *all)
 		&& all->pipe.cmd_args[all->pipe.pipe][2])
 	{
 		ft_putstr_fd("WriteOnMe: cd: too many arguments\n", 2);
-		// ft_putnbr_fd(all->error_code, 2);
-		// ft_putstr_fd("code erreur dans do cd !!\n", 2);
 		return (all->error_code = 1, 1);
 	}
 	if (all->pipe.cmd_args[all->pipe.pipe][1])
