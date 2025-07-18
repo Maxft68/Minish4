@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxoph <maxoph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 16:09:02 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/03/01 13:05:44 by maxoph           ###   ########.fr       */
+/*   Updated: 2025/07/18 18:58:54 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,3 @@ int	ft_printf(const char *str, ...)
 	va_end(lst);
 	return (count_principal);
 }
-
-/* #include <stdio.h>
-
-int main()
-{
-	printf("%d\n", printf("hello\n% "));
-	ft_printf("%d\n", ft_printf("hello\n% "));
-} */

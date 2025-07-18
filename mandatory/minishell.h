@@ -247,7 +247,6 @@ void							create_redir_lst(t_all *all);
 char							*find_last_hd(int pipe, t_all *all);
 char							*search_pipe_redir(int pipe, t_token_type type,
 									t_all *all);
-void							print_node(t_token *token); //-------------------------debug
 void							list_to_tab(t_all *all);
 void							initialize_data(t_all *all, char *old);
 void							handle_expand(char *old, t_all *all);

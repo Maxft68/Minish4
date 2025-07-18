@@ -49,6 +49,6 @@ void	advance_char(t_lexer *lexr)
 
 void	skip_whitespace(t_lexer *lexr)
 {
-	while ((lexr->c > 9 && lexr->c < 14) || lexr->c == 32)
+	while ((lexr->c > 8 && lexr->c < 14) || lexr->c == 32)
 		advance_char(lexr);
 }

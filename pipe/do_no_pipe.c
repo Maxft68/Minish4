@@ -74,33 +74,19 @@ No forks we are in the parent process
 ******************************************************************************/
 int	do_no_pipe(t_all *all)
 {
-	// Toujours initialiser à -1
+
 	all->data.stdout_original = -1;
 	all->data.stdin_original = -1;
 
-	// Sauvegarder AVANT toute redirection
 	all->data.stdout_original = dup(STDOUT_FILENO);
 	if (all->data.stdout_original == -1)
 		return (error_msg_no_pipe(all, "dup stdout"));
 	all->data.stdin_original = dup(STDIN_FILENO);
 	if (all->data.stdin_original == -1)
-	{
-		//ft_close(all, &all->data.stdout_original);
 		return (error_msg_no_pipe(all, "dup stdin"));
-	}
 	if (do_redir_no_pipe(all) == 1 || !all->pipe.cmd_args[0][0])
-	{
-		//ft_putstr_fd("je devrais etre ici", 2);
-		//ft_putstr_fd("\n", 2);
-		//fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 		return (1);
-	}
 	all->error_code = do_built_in(all);
-	
-	// ft_putnbr_fd(all->error_code, 2);
-	// ft_putstr_fd("do no pipe RETURN 0 code erreur \n", 2);
 	fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-	// ft_putnbr_fd(all->error_code, 2);
-	// ft_putstr_fd("apres fd back to origin \n", 2);
 	return (all->error_code);
 }

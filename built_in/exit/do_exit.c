@@ -28,6 +28,15 @@ static int	part_two_long(t_all *all, char *str)
 		return (0);
 }
 
+void	puts_fdback_exit(t_all *all)
+{
+	ft_putstr_fd("write_on_me: exit: ", 2);
+	ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
+	fd_back_origin(all, &all->data.stdout_original,
+		&all->data.stdin_original);
+	ft_exit(": numeric argument required\n", all, 2);
+}
+
 static int	is_long_long(t_all *all, char *str)
 {
 	all->exit.i = 0;
@@ -42,12 +51,7 @@ static int	is_long_long(t_all *all, char *str)
 			all->exit.negative = 1;
 		all->exit.i++;
 		if (str[all->exit.i] == '-' || str[all->exit.i] == '+')
-		{
-			ft_putstr_fd("write_on_me: exit: ", 2);
-			ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
-			fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-			ft_exit(": numeric argument required\n", all, 2);
-		}
+			puts_fdback_exit(all);
 	}
 	while (str[all->exit.i] == '0')
 		all->exit.i++;
@@ -67,10 +71,7 @@ static void	exit_args(t_all *all)
 		if (is_long_long(all, all->pipe.cmd_args[all->pipe.pipe][1]))
 		{
 			im_a_child(all);
-			ft_putstr_fd("write_on_me: exit: ", 2);
-			ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
-			fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-			ft_exit(": numeric argument required\n", all, 2);
+			puts_fdback_exit(all);
 		}
 		else
 		{
@@ -85,7 +86,8 @@ static void	exit_args(t_all *all)
 		im_a_child(all);
 		ft_putstr_fd("write_on_me: exit: ", 2);
 		ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
-		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
+		fd_back_origin(all, &all->data.stdout_original,
+			&all->data.stdin_original);
 		ft_exit(": numeric argument required ARGS\n", all, 2);
 	}
 }
@@ -124,9 +126,9 @@ int	do_exit(t_all *all)
 
 	arg = all->pipe.cmd_args[all->pipe.pipe];
 	if (!arg[1] && all->pipe.nb_pipe == 0)
-	{
-		return (ft_putstr_fd("exit\n", 2),fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original), ft_exit("", all, all->error_code), 0);
-	}
+		return (ft_putstr_fd("exit\n", 2), fd_back_origin(all,
+				&all->data.stdout_original, &all->data.stdin_original),
+			ft_exit("", all, all->error_code), 0);
 	if (!arg[1] && all->pipe.nb_pipe != 0)
 		return (ft_exit("", all, all->error_code), all->error_code);
 	if (ft_str_digit(arg[1]) != 0 || is_long_long(all, arg[1]) != 0)
@@ -134,7 +136,8 @@ int	do_exit(t_all *all)
 		im_a_child(all);
 		ft_putstr_fd("write_on_me: exit: ", 2);
 		ft_putstr_fd(arg[1], 2);
-		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
+		fd_back_origin(all, &all->data.stdout_original,
+			&all->data.stdin_original);
 		ft_exit(": numeric argument required\n", all, 2);
 	}
 	if (arg[1] && arg[2])
@@ -142,6 +145,5 @@ int	do_exit(t_all *all)
 	arg1 = ft_atolli(arg[1]);
 	im_a_child(all);
 	fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-	ft_exit("", all, (arg1 % 256));
-	return (0);
+	return (ft_exit("", all, (arg1 % 256)), 0);
 }

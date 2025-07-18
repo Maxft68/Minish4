@@ -21,11 +21,7 @@ static int	pipe_or_not_pipe(t_all *all)
 			|| !all->pipe.cmd_args[0][0]))
 	{
 		if (do_no_pipe(all) == 1)
-		{
-			// ft_putnbr_fd(all->error_code, 2);
-			// ft_putstr_fd("pipe_or_not_pipe code erreur \n", 2);
 			return (1);
-		}
 		return (0);
 	}
 	else
@@ -35,14 +31,17 @@ static int	pipe_or_not_pipe(t_all *all)
 
 static void	waiting_zzz(t_all *all, int i, int *status)
 {
-	waitpid(all->pipe.pid[i], status, 0);
-	if (WIFEXITED(*status))
-		update_minishell_code(all, WEXITSTATUS(*status));
-	else if (WIFSIGNALED(*status))
+	while (i < all->pipe.nb_pipe + 1)
 	{
-		if (WTERMSIG(*status) == 2)
-			printf("\n");
-		get_code_error(all, WTERMSIG(*status));
+		waitpid(all->pipe.pid[i], status, 0);
+		if (WIFEXITED(*status))
+			update_minishell_code(all, WEXITSTATUS(*status));
+		else if (WIFSIGNALED(*status))
+		{
+			if (WTERMSIG(*status) == 2)
+				printf("\n");
+			get_code_error(all, WTERMSIG(*status));
+		}
 	}
 }
 
@@ -63,34 +62,14 @@ int	exec_part(t_all *all)
 	{
 		pipe_or_not_pipe(all);
 		if (all->pipe.nb_pipe == 0 && is_built_in(all) == 0)
-		{
-			// ft_putnbr_fd(all->error_code, 2);
-			// ft_putstr_fd("forked est bien mis a 0\n", 2);
 			forked = 0;
-		}
-		// ft_putnbr_fd(all->error_code, 2);
-		// ft_putstr_fd("forked est PAS MIS 0\n", 2);
-		// ft_putnbr_fd(all->error_code, 2);
-		// ft_putstr_fd("code erreur dans exec part\n", 2);
 		close_fd_and_hd_fd(all, i);
-		// ft_putnbr_fd(all->error_code, 2);
-		// ft_putstr_fd("code erreur dans exec partv JUSTE APRES\n", 2);
 		i++;
 		all->pipe.pipe++;
 	}
 	i = 0;
 	all->pipe.pipe = 0;
-	// ft_putnbr_fd(all->error_code, 2);
-	// ft_putstr_fd("code erreur dans exec partv JUSTE APRES APRES\n", 2);
 	if (forked == 1)
-	{
-		while (i < all->pipe.nb_pipe + 1)
-			waiting_zzz(all, i++, &status);
-	}
-	// ft_putnbr_fd(all->error_code, 2);
-	// ft_putstr_fd("code erreur dans exec partv JUSTE APRES APRES laaa\n", 2);
-	all->pipe.i = 0;
-	all->pipe.pipe = 0;
-	all->pipe.nb_pipe = 0;
-	return (0);
+		waiting_zzz(all, i++, &status);
+	return (all->pipe.i = 0, all->pipe.pipe = 0, all->pipe.nb_pipe = 0, 0);
 }
