@@ -42,6 +42,7 @@ static void	waiting_zzz(t_all *all, int i, int *status)
 				printf("\n");
 			get_code_error(all, WTERMSIG(*status));
 		}
+		i++;
 	}
 }
 
@@ -70,6 +71,6 @@ int	exec_part(t_all *all)
 	i = 0;
 	all->pipe.pipe = 0;
 	if (forked == 1)
-		waiting_zzz(all, i++, &status);
+			waiting_zzz(all, i, &status);
 	return (all->pipe.i = 0, all->pipe.pipe = 0, all->pipe.nb_pipe = 0, 0);
 }

@@ -72,7 +72,8 @@ void	handle_expand(char *old, t_all *all)
 		check_quotes(old[all->data.z], all);
 		if (old[all->data.z] == '$' && (old[all->data.z + 1] != ' '
 				&& old[all->data.z + 1] != 34 && old[all->data.z + 1] != 39
-				&& old[all->data.z + 1]) && !all->data.s_quote)
+				&& old[all->data.z + 1] && old[all->data.z + 1] != '/')
+			&& !all->data.s_quote)
 		{
 			part_one(all, old, val);
 			reset_quotes(all);
