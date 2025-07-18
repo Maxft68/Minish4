@@ -24,6 +24,18 @@ void	add_env(t_all *all, char *name, char *value)
 	}
 }
 
+void	add_value_envtwo(t_all *all)
+{
+	if (all->data.n)
+	{
+		if (all->data.egal == 1 && search_env(all, all->data.n) == 0)
+			add_env(all, all->data.n, all->data.val);
+		else if (search_env(all, all->data.n) == 1)
+			ft_lstadd_back_env(all, &all->env, ft_lstnew_env(all, all->data.n,
+					all->data.val));
+	}
+}
+
 /******************************************************************************
 If we have '+='
 ******************************************************************************/
@@ -50,14 +62,7 @@ void	add_value_env(t_all *all, char *s)
 		else if (all->data.n)
 			all->data.val = gc_strdup_env("", all);
 	}
-	if (all->data.n)
-	{
-		if (all->data.egal == 1 && search_env(all, all->data.n) == 0)
-			add_env(all, all->data.n, all->data.val);
-		else if (search_env(all, all->data.n) == 1)
-			ft_lstadd_back_env(all, &all->env, ft_lstnew_env(all, all->data.n,
-					all->data.val));
-	}
+	add_value_envtwo(all);
 }
 
 /******************************************************************************
@@ -95,12 +100,10 @@ Check if just print or add a new node env
 ******************************************************************************/
 int	do_export(t_all *all)
 {
-	// ft_putstr_fd("jarrive la ? ", 2);
 	if (ft_strncmp(all->pipe.cmd_args[all->pipe.pipe][0], "export", 6) == 0
 		&& all->pipe.cmd_args[all->pipe.pipe][0][6] == '\0'
 		&& all->pipe.cmd_args[all->pipe.pipe][1] == NULL)
 	{
-		// ft_putstr_fd("jarrive la 1? ", 2);//////////////////////////////////
 		all->export = NULL;
 		copy_list(all);
 		sort_list(all);
