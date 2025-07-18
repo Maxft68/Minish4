@@ -15,13 +15,14 @@ char	*find_path_cmd(t_all *all, char **env)
 	if (!env[i])
 		return (ft_putstr_fd("write_on_me: ", 2), all->error_code = 127,
 			ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][0], 2),
-			ft_putstr_fd(": No such file or directory\n", 2), ft_exit("", all, 127), NULL);
+			ft_putstr_fd(": No such file or directory\n", 2), ft_exit("", all,
+				127), NULL);
 	path_to_search = gc_split(all, env[i] + 5, ':');
 	path = search_good_path(path_to_search, all);
 	if (!path)
 	{
 		ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][0], 2);
-		ft_putstr_fd(": command not found-----------------------------------------\n", 2);
+		ft_putstr_fd(": command not found\n", 2);
 		ft_exit("", all, 127);
 		return (NULL);
 	}
@@ -45,7 +46,7 @@ int	exec_cmd(t_all *all)
 	else
 		path = find_path_cmd(all, env);
 	if (!path)
-		return (127);//ft_exit("", all, 127), 127)
+		return (127);
 	execve(path, cmd, env);
 	ft_putstr_fd("write_on_me: ", 2);
 	perror(cmd[0]);

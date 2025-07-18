@@ -74,7 +74,6 @@ No forks we are in the parent process
 ******************************************************************************/
 int	do_no_pipe(t_all *all)
 {
-
 	all->data.stdout_original = -1;
 	all->data.stdin_original = -1;
 

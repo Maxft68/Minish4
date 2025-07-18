@@ -16,24 +16,24 @@ int	main(int argc, char **argv, char **env)
 		signals_swing();
 		char *firstinput = readline("write_on_me ");
 		if (!firstinput)
-			break;
-			g_sigint_flag = 0;
-			char *input = gc_strdup_input(firstinput, &all);
-			if (create_lexer(input, &all) != -1)
+		break;
+		// char *firstinput = readline("minishell $");
+		// if (!firstinput)
+		// {
+		// 	if (isatty(STDIN_FILENO))
+		// 	write(2, "exit\n", 6);
+		// 	exit (all.error_code);
+		// }
+		g_sigint_flag = 0;
+		char *input = gc_strdup_input(firstinput, &all);
+		if (create_lexer(input, &all) != -1)
 			pars_to_exec(&all);
-			free_garbage_collect(&all.garbage);
-			all.garbage = NULL;
-			all.token = NULL;
-			all.rdir_tkn = NULL;
-		}
-		ft_exit("exit\n", &all, all.error_code);
+		free_garbage_collect(&all.garbage);
+		all.garbage = NULL;
+		all.token = NULL;
+		all.rdir_tkn = NULL;
+	}
+	ft_exit("exit\n", &all, all.error_code);
 	(void)argv; 
 }
 
-//char *firstinput = readline("minishell $"); // UNIQUEMENT POUR TEST MPANIC
-// if (!firstinput)
-// {
-// 	if (isatty(STDIN_FILENO))
-// 	write(2, "exit\n", 6);
-// 	exit (all.error_code);
-// }
