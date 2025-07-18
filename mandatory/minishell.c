@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:13:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:35:30 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/18 21:48:05 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signals_swing();
-		// char *firstinput = readline("write_on_me ");
-		// if (!firstinput)
-		// 	break;
-		char *firstinput = readline("minishell $");
+		char *firstinput = readline("write_on_me ");
 		if (!firstinput)
-		{
-			if (isatty(STDIN_FILENO))
-			write(2, "exit\n", 6);
-			exit (all.error_code);
-		}
+			break;
+		// char *firstinput = readline("minishell $");
+		// if (!firstinput)
+		// {
+		// 	if (isatty(STDIN_FILENO))
+		// 	write(2, "exit\n", 6);
+		// 	exit (all.error_code);
+		// }
 		g_sigint_flag = 0;
 		char *input = gc_strdup_input(firstinput, &all);
 		if (create_lexer(input, &all) != -1)
