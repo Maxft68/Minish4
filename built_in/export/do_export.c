@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:12:13 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:40:53 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../mandatory/minishell.h"
 
 /*******************************************************************************
@@ -115,16 +127,4 @@ int	do_export(t_all *all)
 		&& (all->pipe.cmd_args[all->pipe.pipe][1] != NULL))
 		return (do_add_env(all));
 	return (0);
-}
-
-t_garb_env	*ft_lstnew(t_all *all, void *alloc)
-{
-	t_garb_env	*new;
-
-	new = malloc(sizeof(t_garb_env));
-	if (!new)
-		ft_exit("Cannot allocate memory\n", all, 12);
-	new->pointer = alloc;
-	new->next = NULL;
-	return (new);
 }

@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_exit.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:11:50 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:37:01 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../mandatory/minishell.h"
 
@@ -26,15 +36,6 @@ static int	part_two_long(t_all *all, char *str)
 		return (1);
 	else
 		return (0);
-}
-
-void	puts_fdback_exit(t_all *all)
-{
-	ft_putstr_fd("write_on_me: exit: ", 2);
-	ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
-	fd_back_origin(all, &all->data.stdout_original,
-		&all->data.stdin_original);
-	ft_exit(": numeric argument required\n", all, 2);
 }
 
 static int	is_long_long(t_all *all, char *str)

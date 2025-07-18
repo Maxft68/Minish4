@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_env_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:11:20 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:38:40 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
 int	print_node_env(t_all *all, t_env *env)
 {
 	if (!env)
-		return(127) ;
+		return (127);
 	if (all->pipe.cmd_args[all->pipe.pipe][1])
 	{
 		ft_putstr_fd("env: ", 2);
@@ -21,7 +32,7 @@ int	print_node_env(t_all *all, t_env *env)
 		}
 		env = env->next;
 	}
-	return(0);
+	return (0);
 }
 
 void	free_env(t_env **env)

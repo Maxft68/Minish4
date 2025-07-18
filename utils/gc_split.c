@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gc_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:22:58 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:23:08 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	words_count(char *s, char c)
@@ -31,16 +43,6 @@ static char	*str_c_dup(t_all *all, char *s, int start, int end)
 	ft_strlcpy(alloc, s + start, end - start + 2);
 	return (alloc);
 }
-
-// static void	ft_free_all(char **array, int a)
-// {
-// 	while (a >= 0)
-// 	{
-// 		free(array[a]);
-// 		a--;
-// 	}
-// 	free(array);
-// }
 
 static char	**ft_inter_split(t_all *all, char **array, char *s, char c)
 {

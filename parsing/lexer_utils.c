@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:16:05 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:32:22 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 
 int	create_lexer(char *input, t_all *all)
@@ -22,7 +34,7 @@ int	create_lexer(char *input, t_all *all)
 	return (0);
 }
 
-int new_tkn_char(t_token_type type, t_all *all)
+int	new_tkn_char(t_token_type type, t_all *all)
 {
 	char	c;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:20:28 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:27:12 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 
 /******************************************************************************
@@ -17,7 +29,6 @@ Redirection of file descriptors from char *infile to stdin in child process
 ******************************************************************************/
 int	do_redir_in(t_all *all, char *redir)
 {
-	// ft_putstr_fd("--------je suis dans redir IN\n", 2);
 	all->pipe.fd_infile = open(redir, O_RDONLY);
 	if (all->pipe.fd_infile == -1)
 		return (error_msg(all, redir), 1);
@@ -71,6 +82,7 @@ int	do_redir_fd(t_all *all)
 	}
 	return (0);
 }
+
 void	close_fd_and_hd_fd(t_all *all, int i)
 {
 	if (i < all->pipe.nb_pipe)

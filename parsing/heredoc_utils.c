@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:15:43 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:27:27 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 #include <stdbool.h>
 
@@ -6,7 +18,6 @@ void	initialize_hd_data(char *old, t_all *all)
 	all->hd_data.i = 0;
 	all->hd_data.new = NULL;
 	all->hd_data.tmp2 = gc_malloc(all, ft_strlen(old) + 1);
-	// all->hd_data.hd_escape = false;
 }
 
 void	hd_join_to_new(t_all *all, char *val)

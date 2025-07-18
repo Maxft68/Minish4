@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   catch_heredoc.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:13:52 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:14:52 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 #include <signal.h>
 
@@ -39,8 +51,8 @@ void	hd_abort_error(char *eof)
 	ft_putstr_fd(" delimited by end-of-file (wanted `", STDOUT_FILENO);
 	ft_putstr_fd(eof, STDOUT_FILENO);
 	ft_putstr_fd("')\n\n", STDOUT_FILENO);
-
 }
+
 static char	*process_input_lines(char *str, char *hd_eof, t_all *all)
 {
 	char	*line;

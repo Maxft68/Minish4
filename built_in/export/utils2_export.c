@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2_export.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:12:44 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:38:58 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../mandatory/minishell.h"
 
 void	del_export(t_export **export)
@@ -86,8 +98,8 @@ int	do_add_env(t_all *all)
 {
 	int		x;
 	char	*s;
-	all->data.export_error = 0;
 
+	all->data.export_error = 0;
 	x = 0;
 	while (all->pipe.cmd_args[all->pipe.pipe][1 + x])
 	{

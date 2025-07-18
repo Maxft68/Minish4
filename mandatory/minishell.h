@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:28:05 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:37:49 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -188,6 +200,7 @@ typedef struct s_all
 
 void							ft_exit(char *error, t_all *all,
 									int error_code);
+void							puts_fdback_exit(t_all *all);
 void							close_all_pipe_exit(t_all *all);
 int								ft_close(t_all *all, int *fd);
 void							do_node(char **read_array, t_all *all);
@@ -254,7 +267,7 @@ void							join_to_new(t_all *all, char *val);
 char							*search_pipe_redir(int pipe, t_token_type type,
 									t_all *all);
 /* **********Exec functions************************************************** */
-int							do_pipe(t_all *all);
+int								do_pipe(t_all *all);
 int								do_no_pipe(t_all *all);
 int								do_redir_fd(t_all *all);
 void							fd_back_origin(t_all *all, int *stdout_original,

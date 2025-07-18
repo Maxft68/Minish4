@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:00:07 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 18:22:49 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/18 21:42:08 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ int	do_cd(t_all *all)
 	else if (ft_strcmp(s, "..") == 0)
 		do_cd_double_dot(all);
 	else
-		return(test_the_path(all, s));
-	return(0);
+		return (test_the_path(all, s));
+	return (0);
 }

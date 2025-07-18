@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lex_pars.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:15:56 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:26:28 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../mandatory/minishell.h"
 #include <string.h>
@@ -94,7 +105,7 @@ int	pars_to_exec(t_all *all)
 	if (all->token && !check_tkn_lst(all))
 	{
 		catch_heredoc(all);
-		if (g_sigint_flag >= 1) // 1 = SIGINT, 2 = EOF (Ctrl+D)
+		if (g_sigint_flag >= 1)
 		{
 			g_sigint_flag = 0;
 			return (1);

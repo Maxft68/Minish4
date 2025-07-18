@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_pipe.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:19:45 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:19:51 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 
 static void	open_pipe_and_fork(t_all *all)
@@ -73,9 +85,9 @@ int	do_pipe(t_all *all)
 			{
 				ft_exit("", all, do_built_in(all));
 			}
-			return(exec_cmd(all));
+			return (exec_cmd(all));
 		}
 		ft_exit("", all, 127);
 	}
-	return(1);
+	return (1);
 }

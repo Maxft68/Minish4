@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 10:40:24 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 18:22:49 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/18 21:42:17 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	test_the_path_mini(t_all *all, char *s)
 	{
 		str = gc_strjoin(all, "write_on_me: cd:", s);
 		perror(str);
-		return(all->error_code = 1, 1);
+		return (all->error_code = 1, 1);
 	}
-	return(0);
+	return (0);
 }
 
 static void	chdir_null(t_all *all, char *str, char *s)
@@ -65,9 +65,9 @@ int	test_the_path(t_all *all, char *s)
 					find_the_value(all, "PWD"), s));
 		}
 		else if (chdir(s) == -1)
-			return(chdir_null(all, str, s), 1);
+			return (chdir_null(all, str, s), 1);
 	}
-	return(0);
+	return (0);
 }
 
 char	*replace_until_the_last(t_all *all, char *s, int c)

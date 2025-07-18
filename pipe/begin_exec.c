@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   begin_exec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:19:21 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:19:25 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 
 static void	get_code_error(t_all *all, int n)
@@ -71,6 +83,6 @@ int	exec_part(t_all *all)
 	i = 0;
 	all->pipe.pipe = 0;
 	if (forked == 1)
-			waiting_zzz(all, i, &status);
+		waiting_zzz(all, i, &status);
 	return (all->pipe.i = 0, all->pipe.pipe = 0, all->pipe.nb_pipe = 0, 0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_no_pipe.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:19:32 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:19:38 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 
 /******************************************************************************
@@ -76,7 +88,6 @@ int	do_no_pipe(t_all *all)
 {
 	all->data.stdout_original = -1;
 	all->data.stdin_original = -1;
-
 	all->data.stdout_original = dup(STDOUT_FILENO);
 	if (all->data.stdout_original == -1)
 		return (error_msg_no_pipe(all, "dup stdout"));

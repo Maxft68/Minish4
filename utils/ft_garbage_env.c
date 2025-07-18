@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_garbage_env.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:21:41 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:21:46 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../mandatory/minishell.h"
 
@@ -5,6 +16,7 @@ char	*gc_strdup_env(char *s, t_all *all)
 {
 	char	*alloc;
 	size_t	l;
+
 	if (!s)
 		return (NULL);
 	l = ft_strlen(s);

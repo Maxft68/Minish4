@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:13:32 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:35:30 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 
 volatile sig_atomic_t g_sigint_flag = 0;
@@ -16,7 +28,7 @@ int	main(int argc, char **argv, char **env)
 		signals_swing();
 		// char *firstinput = readline("write_on_me ");
 		// if (!firstinput)
-		// break;
+		// 	break;
 		char *firstinput = readline("minishell $");
 		if (!firstinput)
 		{
@@ -33,7 +45,6 @@ int	main(int argc, char **argv, char **env)
 		all.token = NULL;
 		all.rdir_tkn = NULL;
 	}
-	ft_exit("exit\n", &all, all.error_code);
-	(void)argv; 
+	return((void)argv, ft_exit("exit\n", &all, all.error_code), 0);
 }
 

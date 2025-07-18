@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_pwd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/18 21:12:50 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/18 21:38:48 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -13,7 +24,7 @@ int	do_pwd(t_all *all)
 	}
 	else if (getcwd(s, sizeof(s)))
 		printf("%s\n", s);
-	return(all->error_code = 0, 0);
+	return (all->error_code = 0, 0);
 }
 
 char	*ft_pwd(t_all *all)
