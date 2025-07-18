@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxoph <maxoph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:00:07 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/16 13:47:24 by maxoph           ###   ########.fr       */
+/*   Updated: 2025/07/18 18:22:49 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	do_cd_home(t_all *all, char *s)
 	}
 	else
 	{
-		ft_putstr_fd("WriteOnMe: cd: HOME not set\n", 2);
+		ft_putstr_fd("write_on_me: cd: HOME not set\n", 2);
 		s = NULL;
 	}
 	if (s)
@@ -54,7 +54,7 @@ void	do_cd_minus(t_all *all)
 
 	if (!find_the_value(all, "OLDPWD"))
 	{
-		ft_putstr_fd("WriteOnMe: cd: OLDPWD not set\n", 2);
+		ft_putstr_fd("write_on_me: cd: OLDPWD not set\n", 2);
 		if (search_env(all, "OLDPWD"))
 		{
 			replace_or_add_env(all, "OLDPWD", ft_pwd(all));
@@ -97,7 +97,7 @@ int	do_cd(t_all *all)
 	if (all->pipe.cmd_args[all->pipe.pipe][1]
 		&& all->pipe.cmd_args[all->pipe.pipe][2])
 	{
-		ft_putstr_fd("WriteOnMe: cd: too many arguments\n", 2);
+		ft_putstr_fd("write_on_me: cd: too many arguments\n", 2);
 		return (all->error_code = 1, 1);
 	}
 	if (all->pipe.cmd_args[all->pipe.pipe][1])

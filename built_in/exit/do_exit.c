@@ -43,7 +43,7 @@ static int	is_long_long(t_all *all, char *str)
 		all->exit.i++;
 		if (str[all->exit.i] == '-' || str[all->exit.i] == '+')
 		{
-			ft_putstr_fd("WriteOnMe: exit: ", 2);
+			ft_putstr_fd("write_on_me: exit: ", 2);
 			ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
 			fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 			ft_exit(": numeric argument required\n", all, 2);
@@ -67,7 +67,7 @@ static void	exit_args(t_all *all)
 		if (is_long_long(all, all->pipe.cmd_args[all->pipe.pipe][1]))
 		{
 			im_a_child(all);
-			ft_putstr_fd("WriteOnMe: exit: ", 2);
+			ft_putstr_fd("write_on_me: exit: ", 2);
 			ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
 			fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 			ft_exit(": numeric argument required\n", all, 2);
@@ -75,7 +75,7 @@ static void	exit_args(t_all *all)
 		else
 		{
 			im_a_child(all);
-			ft_putstr_fd("WriteOnMe: exit: too many arguments\n", 2);
+			ft_putstr_fd("write_on_me: exit: too many arguments\n", 2);
 			all->error_code = 1;
 			return ;
 		}
@@ -83,7 +83,7 @@ static void	exit_args(t_all *all)
 	else
 	{
 		im_a_child(all);
-		ft_putstr_fd("WriteOnMe: exit: ", 2);
+		ft_putstr_fd("write_on_me: exit: ", 2);
 		ft_putstr_fd(all->pipe.cmd_args[all->pipe.pipe][1], 2);
 		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 		ft_exit(": numeric argument required ARGS\n", all, 2);
@@ -132,7 +132,7 @@ int	do_exit(t_all *all)
 	if (ft_str_digit(arg[1]) != 0 || is_long_long(all, arg[1]) != 0)
 	{
 		im_a_child(all);
-		ft_putstr_fd("WriteOnMe: exit: ", 2);
+		ft_putstr_fd("write_on_me: exit: ", 2);
 		ft_putstr_fd(arg[1], 2);
 		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 		ft_exit(": numeric argument required\n", all, 2);
