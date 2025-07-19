@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_no_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maxoph <maxoph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:19:38 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/19 00:50:43 by maxoph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ int	do_no_pipe(t_all *all)
 	if (all->data.stdin_original == -1)
 		return (error_msg_no_pipe(all, "dup stdin"));
 	if (do_redir_no_pipe(all) == 1 || !all->pipe.cmd_args[0][0])
+	{
+		fd_back_origin(all, &all->data.stdout_original,
+			&all->data.stdin_original);
 		return (1);
+	}
 	all->error_code = do_built_in(all);
 	fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
 	return (all->error_code);
