@@ -6,7 +6,7 @@
 /*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:13:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:30:45 by rbier            ###   ########.fr       */
+/*   Updated: 2025/07/20 22:31:34 by rbier            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	reset_datas(t_all *all)
 int	main(int argc, char **argv, char **env)
 {
 	t_all	all;
-	char	*firstinput;
 	char	*firstinput;
 	char	*input;
 
