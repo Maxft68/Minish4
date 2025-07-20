@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:13:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:31:34 by rbier            ###   ########.fr       */
+/*   Updated: 2025/07/20 22:46:34 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **env)
 		// 	exit (all.error_code);
 		// }
 		if (g_sigint_flag)
-            all.error_code = 130;
+			all.error_code = 130;
 		g_sigint_flag = 0;
 		input = gc_strdup_input(firstinput, &all);
 		if (create_lexer(input, &all) != -1)

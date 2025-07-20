@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   begin_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:21 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 21:48:35 by rbier            ###   ########.fr       */
+/*   Updated: 2025/07/20 22:45:16 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	waiting_zzz(t_all *all, int i, int *status)
 			if (WTERMSIG(*status) == 2)
 				printf("\n");
 			else if (WTERMSIG(*status) == 3)
-            	printf("Quit\n");
+				printf("Quit\n");
 			get_code_error(all, WTERMSIG(*status));
 		}
 		i++;

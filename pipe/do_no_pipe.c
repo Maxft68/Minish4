@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_no_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxoph <maxoph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/19 00:50:43 by maxoph           ###   ########.fr       */
+/*   Updated: 2025/07/20 22:54:07 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	do_hd_fd_no_pipe(t_all *all)
 {
 	if (find_last_hd(all->pipe.pipe, all))
 	{
-		if (dup2(all->pipe.heredoc_fd[all->pipe.pipe][0], STDIN_FILENO) == -1)
-			error_dup2(all, all->pipe.heredoc_fd[all->pipe.pipe][0], "dup2");
+		if (all->pipe.heredoc_fd[all->pipe.pipe][0] >= 0)
+		{
+			if (dup2(all->pipe.heredoc_fd[all->pipe.pipe][0], STDIN_FILENO) == -1)
+				error_dup2(all, all->pipe.heredoc_fd[all->pipe.pipe][0], "dup2");
+		}
 		ft_close(all, &all->pipe.heredoc_fd[all->pipe.pipe][0]);
 	}
 }
@@ -33,8 +36,11 @@ int	do_redir_in_no_pipe(t_all *all, char *redir)
 	all->pipe.fd_infile = open(redir, O_RDONLY);
 	if (all->pipe.fd_infile == -1)
 		return (error_msg_no_pipe(all, redir), 1);
-	if (dup2(all->pipe.fd_infile, STDIN_FILENO) == -1)
-		return (error_dup2(all, all->pipe.fd_infile, redir), 1);
+	if (all->pipe.fd_infile >= 0)
+	{
+		if (dup2(all->pipe.fd_infile, STDIN_FILENO) == -1)
+			return (error_dup2(all, all->pipe.fd_infile, redir), 1);
+	}
 	ft_close(all, &all->pipe.fd_infile);
 	return (0);
 }
@@ -47,8 +53,11 @@ int	do_redir_out_no_pipe(t_all *all, char *temp, t_token_type type)
 		all->pipe.fd_outfile = open(temp, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (all->pipe.fd_outfile == -1)
 		return (error_msg_no_pipe(all, temp));
-	if (dup2(all->pipe.fd_outfile, STDOUT_FILENO) == -1)
-		return (error_dup2(all, all->pipe.fd_outfile, temp));
+	if (all->pipe.fd_outfile >= 0)
+	{
+		if (dup2(all->pipe.fd_outfile, STDOUT_FILENO) == -1)
+			return (error_dup2(all, all->pipe.fd_outfile, temp));
+	}
 	ft_close(all, &all->pipe.fd_outfile);
 	return (0);
 }
