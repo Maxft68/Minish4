@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   catch_heredoc.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 20:23:27 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/20 20:23:33 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mandatory/minishell.h"
 #include <signal.h>
 
@@ -46,7 +58,7 @@ void	catch_heredoc(t_all *all)
 			if (g_sigint_flag == 1)
 			{
 				handle_signal_interruption(all);
-				return;
+				return ;
 			}
 			if (!str)
 				break ;

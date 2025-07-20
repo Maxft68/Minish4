@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:28:05 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:37:49 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/20 20:21:30 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,8 @@ char							*gc_itoa(t_all *all, int n);
 int								create_lexer(char *input, t_all *all);
 int								pars_to_exec(t_all *all);
 char							*pick_char(char *str, t_token_type type,
+									t_all *all);
+char							*process_input_lines(char *str, char *hd_eof,
 									t_all *all);
 void							check_quotes(char c, t_all *all);
 bool							as_quotes(char *str);

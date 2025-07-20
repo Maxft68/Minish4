@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   catch_heredoc_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 20:23:03 by mdsiurds          #+#    #+#             */
+/*   Updated: 2025/07/20 20:24:05 by mdsiurds         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../mandatory/minishell.h"
 
-static void sigint_hd(int signum)
+static void	sigint_hd(int signum)
 {
 	if (signum == SIGINT)
 	{
@@ -9,19 +20,17 @@ static void sigint_hd(int signum)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		// rl_redisplay();
 		close(STDIN_FILENO);
 		return ;
 	}
 }
 
-static void hd_abort_error(char *eof)
+static void	hd_abort_error(char *eof)
 {
 	ft_putstr_fd("minishell: warning: here-document", STDOUT_FILENO);
 	ft_putstr_fd(" delimited by end-of-file (wanted `", STDOUT_FILENO);
 	ft_putstr_fd(eof, STDOUT_FILENO);
 	ft_putstr_fd("')\n", STDOUT_FILENO);
-
 }
 
 static char	*append_line(char *str, char *line, t_all *all)
@@ -48,8 +57,9 @@ static char	*append_line(char *str, char *line, t_all *all)
 
 static char	*process_line(char *line, char *str, char *hd_eof, t_all *all)
 {
-	char	*new_str = NULL;
+	char	*new_str;
 
+	new_str = NULL;
 	if (line == NULL)
 	{
 		if (g_sigint_flag == 0)
@@ -71,8 +81,7 @@ static char	*process_line(char *line, char *str, char *hd_eof, t_all *all)
 		return (NULL);
 	}
 	new_str = append_line(str, line, all);
-	free(line);
-	return (new_str);
+	return (free(line), new_str);
 }
 
 char	*process_input_lines(char *str, char *hd_eof, t_all *all)
