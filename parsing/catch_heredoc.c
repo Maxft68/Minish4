@@ -1,85 +1,7 @@
 #include "../mandatory/minishell.h"
 #include <signal.h>
 
-static char	*append_line(char *str, char *line, t_all *all)
-{
-	size_t	line_len;
-	size_t	new_len;
-	char	*new_str;
-
-	if (line == NULL)
-		return (str);
-	line_len = ft_strlen(line);
-	new_len = all->hd_data.str_len + line_len + 2;
-	new_str = gc_malloc(all, new_len);
-	if (new_str == NULL)
-		return (NULL);
-	if (all->hd_data.str_len > 0 && str != NULL)
-		ft_memcpy(new_str, str, all->hd_data.str_len);
-	ft_memcpy(new_str + all->hd_data.str_len, line, line_len);
-	new_str[all->hd_data.str_len + line_len] = '\n';
-	new_str[all->hd_data.str_len + line_len + 1] = '\0';
-	all->hd_data.str_len = all->hd_data.str_len + line_len + 1;
-	return (new_str);
-}
-
-static void	sigint_hd(int signum)
-{
-	if (signum == SIGINT)
-	{
-		g_sigint_flag = 1;
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		//close(STDIN_FILENO);
-		return ;
-	}
-}
-void	hd_abort_error(char *eof)
-{
-	ft_putstr_fd("minishell: warning: here-document", STDOUT_FILENO);
-	ft_putstr_fd(" delimited by end-of-file (wanted `", STDOUT_FILENO);
-	ft_putstr_fd(eof, STDOUT_FILENO);
-	ft_putstr_fd("')\n", STDOUT_FILENO);
-
-}
-static char	*process_input_lines(char *str, char *hd_eof, t_all *all)
-{
-	char	*line;
-	char	*new_str;
-	int		save_stdin;
-
-	save_stdin = dup(STDIN_FILENO);
-	signal(SIGINT, &sigint_hd);
-	while (1)
-	{
-		line = readline("> ");
-		if (line == NULL)
-		{
-			if (g_sigint_flag == 0)
-			{
-				hd_abort_error(hd_eof);
-				// Ne pas toucher à g_sigint_flag ici, juste retourner la chaîne courante
-			}
-			break ;
-		}
-		if (g_sigint_flag == 1)
-			break ;
-		if (ft_strncmp(line, hd_eof, all->hd_data.hd_eof_len) == 0
-			&& ft_strlen(line) == all->hd_data.hd_eof_len)
-		{
-			free(line);
-			break ;
-		}
-		new_str = append_line(str, line, all);
-		if (new_str == NULL)
-			break ;
-		str = new_str;
-		free(line);
-	}
-	dup2(save_stdin, STDIN_FILENO);
-	return (close(save_stdin), str);
-}
-
-char	*append_hd(char *hd_eof, t_all *all)
+static char	*append_hd(char *hd_eof, t_all *all)
 {
 	char	*str;
 
@@ -93,6 +15,20 @@ char	*append_hd(char *hd_eof, t_all *all)
 	return (str);
 }
 
+static void	handle_signal_interruption(t_all *all)
+{
+	t_token	*tmp;
+
+	tmp = all->token;
+	while (tmp)
+	{
+		if (tmp->type == HEREDOC && tmp->next)
+			tmp->next->str = NULL;
+		tmp = tmp->next;
+	}
+	all->error_code = 130;
+}
+
 void	catch_heredoc(t_all *all)
 {
 	t_token	*tmp;
@@ -104,36 +40,12 @@ void	catch_heredoc(t_all *all)
 	{
 		if (tmp->type == HEREDOC)
 		{
-			//ft_putstr_fd("HELLOOOOOOOOOOOOOOOOOOO\n", 2);
 			g_sigint_flag = 0;
 			str = gc_strdup(append_hd(tmp->next->str, all), all);
 			initialize_hd_data(str, all);
 			if (g_sigint_flag == 1)
 			{
-				// On annule tous les heredoc restants pour ce parsing
-				while (tmp) {
-					if (tmp->type == HEREDOC && tmp->next)
-						tmp->next->str = NULL;
-					tmp = tmp->next;
-				}
-				all->error_code = 130;
-				// Nettoyage fort des fd heredoc
-				// if (all->pipe.heredoc_fd)
-				// {
-				// 	for (int i = 0; i < all->pipe.nb_pipe; i++)
-				// 	{
-				// 		if (all->pipe.heredoc_fd[i] && all->pipe.heredoc_fd[i][0] != -1)
-				// 		{
-				// 			close(all->pipe.heredoc_fd[i][0]);
-				// 			all->pipe.heredoc_fd[i][0] = -1;
-				// 		}
-				// 		if (all->pipe.heredoc_fd[i] && all->pipe.heredoc_fd[i][1] != -1)
-				// 		{
-				// 			close(all->pipe.heredoc_fd[i][1]);
-				// 			all->pipe.heredoc_fd[i][1] = -1;
-				// 		}
-				// 	}
-				// }
+				handle_signal_interruption(all);
 				return;
 			}
 			if (!str)
