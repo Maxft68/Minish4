@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:22:22 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:22:30 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/20 16:57:53 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,7 @@ void	ft_lstclear(t_token **token)
 	while (*token && token)
 	{
 		temp = (*token)->next;
-		if ((*token)->str)
-		{
-			free((*token)->str);
-			(*token)->str = NULL;
-		}
-		free(*token);
+		(*token)->str = NULL;
 		*token = temp;
 	}
 }

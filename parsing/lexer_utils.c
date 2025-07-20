@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:16:05 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:32:22 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/20 15:07:17 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	create_lexer(char *input, t_all *all)
 {
+	while ((*input > 7 && *input < 14) || *input == 32 )
+		input++;
 	if (input && input[0] != '\0')
 		add_history(input);
 	if (input[0] == '\0')
@@ -30,7 +32,7 @@ int	create_lexer(char *input, t_all *all)
 	all->lexer->c = all->lexer->input[0];
 	all->lexer->cmd = true;
 	all->lexer->redir = 0;
-	skip_whitespace(all->lexer);
+	//skip_whitespace(all->lexer);
 	return (0);
 }
 

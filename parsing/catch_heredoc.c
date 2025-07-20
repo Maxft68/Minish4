@@ -29,7 +29,7 @@ static void	sigint_hd(int signum)
 	{
 		g_sigint_flag = 1;
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		close(STDIN_FILENO);
+		//close(STDIN_FILENO);
 		return ;
 	}
 }
@@ -57,7 +57,7 @@ static char	*process_input_lines(char *str, char *hd_eof, t_all *all)
 			if (g_sigint_flag == 0)
 			{
 				hd_abort_error(hd_eof);
-				g_sigint_flag = 2;
+				// Ne pas toucher à g_sigint_flag ici, juste retourner la chaîne courante
 			}
 			break ;
 		}
@@ -104,14 +104,37 @@ void	catch_heredoc(t_all *all)
 	{
 		if (tmp->type == HEREDOC)
 		{
+			//ft_putstr_fd("HELLOOOOOOOOOOOOOOOOOOO\n", 2);
 			g_sigint_flag = 0;
 			str = gc_strdup(append_hd(tmp->next->str, all), all);
 			initialize_hd_data(str, all);
-			if (g_sigint_flag >= 1)
+			if (g_sigint_flag == 1)
 			{
-				tmp->next->str = NULL;
+				// On annule tous les heredoc restants pour ce parsing
+				while (tmp) {
+					if (tmp->type == HEREDOC && tmp->next)
+						tmp->next->str = NULL;
+					tmp = tmp->next;
+				}
 				all->error_code = 130;
-				break;
+				// Nettoyage fort des fd heredoc
+				// if (all->pipe.heredoc_fd)
+				// {
+				// 	for (int i = 0; i < all->pipe.nb_pipe; i++)
+				// 	{
+				// 		if (all->pipe.heredoc_fd[i] && all->pipe.heredoc_fd[i][0] != -1)
+				// 		{
+				// 			close(all->pipe.heredoc_fd[i][0]);
+				// 			all->pipe.heredoc_fd[i][0] = -1;
+				// 		}
+				// 		if (all->pipe.heredoc_fd[i] && all->pipe.heredoc_fd[i][1] != -1)
+				// 		{
+				// 			close(all->pipe.heredoc_fd[i][1]);
+				// 			all->pipe.heredoc_fd[i][1] = -1;
+				// 		}
+				// 	}
+				// }
+				return;
 			}
 			if (!str)
 				break ;
@@ -121,7 +144,4 @@ void	catch_heredoc(t_all *all)
 		}
 		tmp = tmp->next;
 	}
-	if (all->data.stdout_original > 2 || all->data.stdin_original > 2)
-		fd_back_origin(all, &all->data.stdout_original, &all->data.stdin_original);
-	g_sigint_flag = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:15:56 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:26:28 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/20 16:57:43 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,20 @@ int	pars_to_exec(t_all *all)
 		catch_heredoc(all);
 		if (g_sigint_flag >= 1)
 		{
-			g_sigint_flag = 0;
+		
+			all->pipe.nb_pipe = 0;
+			all->pipe.pipe = 0;
+			all->pipe.i = 0;
 			return (1);
 		}
-		create_redir_lst(all);
-		list_to_tab(all);
-		if (exec_part(all) == 1)
-			return (1);
 	}
+	create_redir_lst(all);
+	list_to_tab(all);
+	if (exec_part(all) == 1)
+		return (1);
 	return (0);
 }
+#include <fcntl.h>
+#include <errno.h>
+#include <stdio.h>
+
