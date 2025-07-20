@@ -35,10 +35,10 @@ static void	sigint_hd(int signum)
 }
 void	hd_abort_error(char *eof)
 {
-	ft_putstr_fd("minishell:warning: here-document", STDOUT_FILENO);
+	ft_putstr_fd("minishell: warning: here-document", STDOUT_FILENO);
 	ft_putstr_fd(" delimited by end-of-file (wanted `", STDOUT_FILENO);
 	ft_putstr_fd(eof, STDOUT_FILENO);
-	ft_putstr_fd("')\n\n", STDOUT_FILENO);
+	ft_putstr_fd("')\n", STDOUT_FILENO);
 
 }
 static char	*process_input_lines(char *str, char *hd_eof, t_all *all)
