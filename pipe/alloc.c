@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:08 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/21 14:38:32 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:37:05 by rbier            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	alloc_my_herdoc_fd(t_all *all)
 			* (all->pipe.nb_pipe + 1));
 	while (all->exec.i < all->pipe.nb_pipe + 1)
 	{
-		all->pipe.heredoc_fd[all->exec.i] = (int *)gc_malloc(all, sizeof(int) * 2);
+		all->pipe.heredoc_fd[all->exec.i] = (int *)gc_malloc(all, sizeof(int)
+				* 2);
 		all->pipe.heredoc_fd[all->exec.i][0] = -1;
 		all->pipe.heredoc_fd[all->exec.i][1] = -1;
 		all->exec.i++;

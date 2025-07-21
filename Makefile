@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+         #
+#    By: rbier <rbier@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 13:52:45 by mdsiurds          #+#    #+#              #
-#    Updated: 2025/07/20 20:22:03 by mdsiurds         ###   ########.fr        #
+#    Updated: 2025/07/21 16:45:24 by rbier            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC =	mandatory/minishell.c \
 		pipe/error.c\
 		pipe/fd_back.c\
 		pipe/exec_utils.c\
+		pipe/exec_utils2.c\
 		parsing/expand.c\
 		parsing/expand_utils.c\
 		parsing/lex_pars.c\

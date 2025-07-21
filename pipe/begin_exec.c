@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   begin_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:21 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/21 14:38:18 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:49:27 by rbier            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/minishell.h"
-
-static void	get_code_error(t_all *all, int n)
-{
-	all->error_code = n + 128;
-}
-
-static void	update_minishell_code(t_all *all, int n)
-{
-	if (n >= 0 && n < 256)
-		all->error_code = n;
-	else if (n >= 256)
-		all->error_code = n % 256;
-	else
-		all->error_code = (n % 256) + 256;
-}
 
 static int	pipe_or_not_pipe(t_all *all)
 {
@@ -41,24 +26,6 @@ static int	pipe_or_not_pipe(t_all *all)
 	return (0);
 }
 
-static void	waiting_zzz(t_all *all, int i, int *status)
-{
-	while (i < all->pipe.nb_pipe + 1)
-	{
-		waitpid(all->pipe.pid[i], status, 0);
-		if (WIFEXITED(*status))
-			update_minishell_code(all, WEXITSTATUS(*status));
-		else if (WIFSIGNALED(*status))
-		{
-			if (WTERMSIG(*status) == 2)
-				printf("\n");
-			else if (WTERMSIG(*status) == 3)
-				printf("Quit\n");
-			get_code_error(all, WTERMSIG(*status));
-		}
-		i++;
-	}
-}
 int	nb_cmd(t_all *all)
 {
 	t_token	*tmp;
@@ -74,11 +41,13 @@ int	nb_cmd(t_all *all)
 	}
 	return (i);
 }
+
 void	alloc_all(t_all *all)
 {
 	alloc_my_pipe_fd(all);
 	alloc_my_herdoc_fd(all);
 }
+
 int	exec_part(t_all *all)
 {
 	int	status;

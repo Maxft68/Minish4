@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:13:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/21 13:04:30 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:35:12 by rbier            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	reset_datas(t_all *all)
 int	main(int argc, char **argv, char **env)
 {
 	t_all	all;
-	//char	*firstinput;
+	char	*firstinput;
 	char	*input;
 
 	if (argc != 1)
@@ -39,16 +39,9 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signals_swing();
-		// firstinput = readline("write_on_me ");
-		// if (!firstinput)
-		// 	break ;
-		char *firstinput = readline("minishell $");
+		firstinput = readline("write_on_me ");
 		if (!firstinput)
-		{
-			if (isatty(STDIN_FILENO))
-			write(2, "exit\n", 6);
-			exit (all.error_code);
-		}
+			break ;
 		if (g_sigint_flag)
 			all.error_code = 130;
 		g_sigint_flag = 0;

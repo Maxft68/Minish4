@@ -6,7 +6,7 @@
 /*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:15:35 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:17:48 by rbier            ###   ########.fr       */
+/*   Updated: 2025/07/21 16:30:56 by rbier            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ int	part_one(t_all *all, char *old, char *val)
 	all->data.t = 0;
 	if (old[all->data.z] == '?')
 		return (do_dollar_interrogation(all), 0);
-	if (old[all->data.z] == '"')
-		return (all->data.d_quote = true, all->data.z++, 0);
 	if ((ft_isdigit(old[all->data.z]) || !ft_isalpha(old[all->data.z]))
 		&& old[all->data.z] != '_')
 	{
-		if (old[all->data.z] != 39)
+		if (old[all->data.z] != 39 && old[all->data.z] != 34)
 			all->data.z++;
 		return (0);
 	}
@@ -83,7 +81,6 @@ void	handle_expand(char *old, t_all *all)
 	{
 		check_quotes(old[all->data.z], all);
 		if (old[all->data.z] == '$' && (old[all->data.z + 1] != ' '
-				// && old[all->data.z + 1] != 34 && old[all->data.z + 1] != 39
 				&& old[all->data.z + 1] && old[all->data.z + 1] != '/')
 			&& !all->data.s_quote)
 		{

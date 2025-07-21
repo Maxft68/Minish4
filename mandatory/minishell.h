@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbier <rbier@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:28:05 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/21 12:27:38 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:44:44 by rbier            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ int								find_last_hd_int(int pipe, t_all *all);
 /* **********Exec functions************************************************** */
 int								do_pipe(t_all *all);
 int								do_no_pipe(t_all *all);
+void							waiting_zzz(t_all *all, int i, int *status);
 int								do_redir_fd(t_all *all);
 void							fd_back_origin(t_all *all, int *stdout_original,
 									int *stdin_original);
