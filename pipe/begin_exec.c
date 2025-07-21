@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:21 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/21 13:11:54 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:38:18 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ int	nb_cmd(t_all *all)
 	}
 	return (i);
 }
+void	alloc_all(t_all *all)
+{
+	alloc_my_pipe_fd(all);
+	alloc_my_herdoc_fd(all);
+}
 int	exec_part(t_all *all)
 {
 	int	status;
@@ -85,12 +90,12 @@ int	exec_part(t_all *all)
 	forked = 1;
 	all->pipe.pid = gc_malloc(all, sizeof(pid_t) * (all->pipe.nb_pipe + 1));
 	memset(all->pipe.pid, 0, sizeof(pid_t) * (all->pipe.nb_pipe + 1));
-	alloc_my_pipe_fd(all);
-	alloc_my_herdoc_fd(all);
+	alloc_all(all);
 	while (i < all->pipe.nb_pipe + 1)
 	{
 		pipe_or_not_pipe(all);
-		if (((all->pipe.nb_pipe == 0 && is_built_in(all) == 0) || nb_cmd(all) == 0))
+		if (((all->pipe.nb_pipe == 0 && is_built_in(all) == 0)
+				|| nb_cmd(all) == 0))
 			forked = 0;
 		close_fd_and_hd_fd(all, i);
 		i++;
