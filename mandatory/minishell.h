@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:28:05 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 20:21:30 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:27:38 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,7 @@ void							handle_expand(char *old, t_all *all);
 void							join_to_new(t_all *all, char *val);
 char							*search_pipe_redir(int pipe, t_token_type type,
 									t_all *all);
+int								find_last_hd_int(int pipe, t_all *all);
 /* **********Exec functions************************************************** */
 int								do_pipe(t_all *all);
 int								do_no_pipe(t_all *all);

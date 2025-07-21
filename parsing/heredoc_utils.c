@@ -6,13 +6,35 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:15:43 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/18 21:27:27 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:26:50 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/minishell.h"
 #include <stdbool.h>
 
+int    find_last_hd_int(int pipe, t_all *all) //new
+{
+    t_token    *tmp;
+    int        redir;
+
+    tmp = all->rdir_tkn;
+    redir = 0;
+    while (tmp && tmp->pipe != pipe)
+        tmp = tmp->next;
+    if (tmp && tmp->pipe == pipe)
+    {
+        while (tmp->next && tmp->next->pipe == pipe)
+        {
+            if (tmp->type == HEREDOC && tmp->next)
+                redir = 1;
+            if (tmp->type == REDIRECT_IN)
+                redir = 0;
+            tmp = tmp->next;
+        }
+    }
+    return (redir);
+}
 void	initialize_hd_data(char *old, t_all *all)
 {
 	all->hd_data.i = 0;

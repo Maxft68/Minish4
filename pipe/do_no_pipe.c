@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:32 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:54:07 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 13:13:45 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ Redirection of the last heredoc in the pipe to stdin in parent process
 ******************************************************************************/
 void	do_hd_fd_no_pipe(t_all *all)
 {
-	if (find_last_hd(all->pipe.pipe, all))
+	if (find_last_hd_int(all->pipe.pipe, all) == 1)
 	{
 		if (all->pipe.heredoc_fd[all->pipe.pipe][0] >= 0)
 		{
-			if (dup2(all->pipe.heredoc_fd[all->pipe.pipe][0], STDIN_FILENO) == -1)
-				error_dup2(all, all->pipe.heredoc_fd[all->pipe.pipe][0], "dup2");
+			if (dup2(all->pipe.heredoc_fd[all->pipe.pipe][0], STDIN_FILENO) ==
+				-1)
+				error_dup2(all, all->pipe.heredoc_fd[all->pipe.pipe][0],
+					"dup2");
 		}
 		ft_close(all, &all->pipe.heredoc_fd[all->pipe.pipe][0]);
 	}

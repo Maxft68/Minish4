@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:20:28 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:59:48 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:35:03 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Redirection of the last heredoc in the pipe to stdin in child process
 ******************************************************************************/
 void	do_hd_fd(t_all *all)
 {
-	if (find_last_hd(all->pipe.pipe, all))
+	if (find_last_hd_int(all->pipe.pipe, all) == 1)
 	{
 		if (all->pipe.heredoc_fd[all->pipe.pipe][0] >= 0)
 		{

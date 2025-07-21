@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:45 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:54:17 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:34:31 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	open_pipe_and_fork(t_all *all)
 
 static void	open_hd_fd(t_all *all)
 {
-	if (find_last_hd(all->pipe.pipe, all))
+	if (find_last_hd_int(all->pipe.pipe, all) == 1)
 	{
 		if (all->pipe.heredoc_fd[all->pipe.pipe][0] >= 0)
 		{
@@ -42,7 +42,7 @@ static void	open_hd_fd(t_all *all)
 static void	open_redir_in(t_all *all)
 {
 	if (search_pipe_redir(all->pipe.pipe, REDIRECT_IN, all)
-		&& !find_last_hd(all->pipe.pipe, all))
+		&& find_last_hd_int(all->pipe.pipe, all) == 0)
 	{
 		if (do_redir_fd(all) == -1)
 			ft_exit("", all, 1);

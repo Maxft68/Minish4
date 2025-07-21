@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 21:19:21 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 22:45:16 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 13:11:54 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,21 @@ static void	waiting_zzz(t_all *all, int i, int *status)
 		i++;
 	}
 }
+int	nb_cmd(t_all *all)
+{
+	t_token	*tmp;
+	int		i;
 
+	i = 0;
+	tmp = all->token;
+	while (tmp)
+	{
+		if (tmp->type == 3)
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
 int	exec_part(t_all *all)
 {
 	int	status;
@@ -76,7 +90,7 @@ int	exec_part(t_all *all)
 	while (i < all->pipe.nb_pipe + 1)
 	{
 		pipe_or_not_pipe(all);
-		if (all->pipe.nb_pipe == 0 && is_built_in(all) == 0)
+		if (((all->pipe.nb_pipe == 0 && is_built_in(all) == 0) || nb_cmd(all) == 0))
 			forked = 0;
 		close_fd_and_hd_fd(all, i);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:23:03 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/07/20 20:24:05 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:24:00 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,33 +55,57 @@ static char	*append_line(char *str, char *line, t_all *all)
 	return (new_str);
 }
 
-static char	*process_line(char *line, char *str, char *hd_eof, t_all *all)
-{
-	char	*new_str;
+// static char	*process_line(char *line, char *str, char *hd_eof, t_all *all)
+// {
+// 	char	*new_str;
 
-	new_str = NULL;
-	if (line == NULL)
-	{
-		if (g_sigint_flag == 0)
-		{
-			hd_abort_error(hd_eof);
-			g_sigint_flag = 2;
-		}
-		return (NULL);
-	}
-	if (g_sigint_flag == 1)
-	{
-		str = NULL;
-		return (NULL);
-	}
-	if (ft_strncmp(line, hd_eof, all->hd_data.hd_eof_len) == 0
-		&& ft_strlen(line) == all->hd_data.hd_eof_len)
-	{
-		free(line);
-		return (NULL);
-	}
-	new_str = append_line(str, line, all);
-	return (free(line), new_str);
+// 	new_str = NULL;
+// 	if (line == NULL)
+// 	{
+// 		if (g_sigint_flag == 0)
+// 		{
+// 			hd_abort_error(hd_eof);
+// 			g_sigint_flag = 2;
+// 		}
+// 		return (NULL);
+// 	}
+// 	if (g_sigint_flag == 1)
+// 	{
+// 		str = NULL;
+// 		return (NULL);
+// 	}
+// 	if (ft_strncmp(line, hd_eof, all->hd_data.hd_eof_len) == 0
+// 		&& ft_strlen(line) == all->hd_data.hd_eof_len)
+// 	{
+// 		free(line);
+// 		return (NULL);
+// 	}
+// 	new_str = append_line(str, line, all);
+// 	return (free(line), new_str);
+// }
+
+
+static char    *process_line(char *line, char *str, char *hd_eof, t_all *all)
+{
+    char    *new_str;
+
+    new_str = NULL;
+    if (line == NULL || (ft_strncmp(line, hd_eof, all->hd_data.hd_eof_len) == 0
+        && ft_strlen(line) == all->hd_data.hd_eof_len))
+    {
+        if (!line)
+            hd_abort_error(hd_eof);
+        if (line)
+            free(line);
+        return (NULL);
+    }
+    if (g_sigint_flag == 1)
+    {
+        str = NULL;
+        return (NULL);
+    }
+    new_str = append_line(str, line, all);
+    return (free(line), new_str);
 }
 
 char	*process_input_lines(char *str, char *hd_eof, t_all *all)
